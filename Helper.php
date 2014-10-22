@@ -2,7 +2,7 @@
 namespace Plugin\Application;
 
 class Helper {
-	public static function createForm () {
+	public static function createTestimonialForm () {
 		$form = new \Ip\Form();
 
 		$field = new \Ip\Form\Field\Text(
@@ -46,6 +46,57 @@ class Helper {
 			array(
 				'name' => 'sa',
 				'value' => 'Application.sendTestimonial', // site controller action method
+			));
+		$form->addField($field);
+
+		$field = new \Ip\Form\Field\Submit(
+			array(
+				'value' => __('Skicka', 'Hjartesorg', false),
+				'css' => 'testimonial__btn--submit button-positive--filled'
+			)
+		);
+		$form->addField($field);
+
+		//$form->removeSpamCheck(); // Only For debugging!
+
+		return $form;
+	}
+
+	public static function createContactForm () {
+		$form = new \Ip\Form();
+
+		$field = new \Ip\Form\Field\Text(
+			array(
+				'name' => 'name',
+				'label' => __('Namn', 'Hjartesorg', false),
+				'css' => 'input-field'
+			));
+		$form->addField($field);
+
+		$field = new \Ip\Form\Field\Text(
+			array(
+				'name' => 'email',
+				'label' => __('E-post', 'Hjartesorg', false),
+				'css' => 'input-field'
+			));
+		$field->addValidator('Required');
+		$field->addValidator('Email');
+		$form->addField($field);
+
+		$field = new \Ip\Form\Field\TextArea(
+			array(
+				'name' => 'message',
+				'label' => __('Meddelande', 'Hjartesorg', false),
+				'css' => 'input-field'
+			));
+		$field->addValidator('Required');
+		$form->addField($field);
+
+		// 'sa' means Site controller action.
+		$field = new \Ip\Form\Field\Hidden(
+			array(
+				'name' => 'sa',
+				'value' => 'Application.sendContactEmail', // site controller action method
 			));
 		$form->addField($field);
 
