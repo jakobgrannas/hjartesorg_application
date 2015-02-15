@@ -83,7 +83,7 @@ class Helper {
 		$field->addValidator('Email');
 		$form->addField($field);
 
-		$field = new \Ip\Form\Field\TextArea(
+		$field = new \Ip\Form\Field\Textarea(
 			array(
 				'name' => 'message',
 				'label' => __('Meddelande', 'Hjartesorg', false),
