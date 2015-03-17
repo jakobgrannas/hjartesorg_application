@@ -7,7 +7,7 @@ class SiteController extends \Ip\Controller {
 	public function sendTestimonial()
 	{
 		$name = ipRequest()->getPost('name');
-		$mailTo = "jakob.grannas@gmail.com";
+		$mailTo = ipGetOptionLang('Config.websiteEmail');
 		$templateVars = array(
 			'message' => __('Tack för att du hjälper oss att förbättras!', 'Hjartesorg', false)
 		);
@@ -33,7 +33,7 @@ class SiteController extends \Ip\Controller {
 		);
 
 		$emailHtml = ipEmailTemplate($emailData);
-		ipSendEmail("omdome@hjartesorg.se", $name, $mailTo, 'Hjärtesorg.se', "Nytt kundomdöme från " . $name, $emailHtml);
+		ipSendEmail(ipGetOptionLang('Config.websiteEmail'), $name, $mailTo, 'Hjärtesorg.se', "Nytt kundomdöme från " . $name, $emailHtml);
 
 		$data = $this->getSuccessData($templateVars);
 		return new \Ip\Response\Json($data);
@@ -43,7 +43,7 @@ class SiteController extends \Ip\Controller {
 	{
 		$name = ipRequest()->getPost('name');
 		$email = ipRequest()->getPost('email');
-		$mailTo = "jakob.grannas@gmail.com";
+		$mailTo = ipGetOptionLang('Config.websiteEmail');
 		$templateVars = array(
 			'message' => __('Meddelande skickat!', 'Hjartesorg', false)
 		);
@@ -68,7 +68,7 @@ class SiteController extends \Ip\Controller {
 		);
 
 		$emailHtml = ipEmailTemplate($emailData);
-		ipSendEmail($email, $name, $mailTo, 'Hjärtesorg.se', "Nytt mejl från " . $name, $emailHtml);
+		ipSendEmail(ipGetOptionLang('Config.websiteEmail'), $name, $mailTo, 'Hjärtesorg.se', "Nytt mejl från " . $name, $emailHtml);
 
 		$data = $this->getSuccessData($templateVars);
 		return new \Ip\Response\Json($data);
